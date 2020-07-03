@@ -39,9 +39,16 @@ module "sslcert_letsencrypt" {
 
 # Instance  
 
+
+# keyname 
+resource "random_string" "keyname" {
+  length = 8
+  special = false
+}
+
 # SSH key fpor provision
 resource "aws_key_pair" "ptfe-key" {
-  key_name   = "ptfe-key"
+  key_name   = "ptfe-key-${random_string.keyname.id}"
   public_key = "${file("~/.ssh/id_rsa.pub")}"
 }
 
