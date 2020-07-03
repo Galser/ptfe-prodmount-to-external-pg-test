@@ -1,12 +1,10 @@
 # ptfe-prodmount-to-external-pg-test
 Repository to test  ticket 29768 , ptfe migrate from mounted disk with PG 9.5.19 to an external services with PG 9.6.
 
+Notes are here [notes.md]
+
 
 # TODO
-
- - [ ] Reinstall TFE with THAT PGSQL 
- - [ ] Test TFE
-
 
 # DONE
 - [x] Import/clone old `ptfe-prodmount` repo
@@ -16,4 +14,6 @@ Repository to test  ticket 29768 , ptfe migrate from mounted disk with PG 9.5.19
 - [X] Create new RDS PGSQL with version 9.6
     - psql --version
       psql (PostgreSQL) 9.5.22
+- [X] Reinstall TFE with THAT PGSQL 
+- [X] Test TFE
     

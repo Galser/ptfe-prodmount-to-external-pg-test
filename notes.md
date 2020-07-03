@@ -55,3 +55,50 @@ docker system prune --all --volumes
 ```
 rm -rf /etc/default/replicated* /etc/init.d/replicated* /etc/init/replicated* /etc/replicated* /etc/sysconfig/replicated* /etc/systemd/system/multi-user.target.wants/replicated* /etc/systemd/system/replicated* /run/replicated* /usr/local/bin/replicated* /var/lib/replicated* /var/log/upstart/replicated*
 ```
+
+
+### Prepare DB 
+
+- Login and create DB ( 
+` psql -h ptfe-prodmount-db-migrate-test-db.cfzxhhyh79j5.eu-central-1.rds.amazonaws.com -U postgres`
+
+CREATE DATABASE "ptfe-prodmount-dbmigratetest-db"
+
+^^^ note quotes , as DB name contains dashes
+- Create schemas : 
+
+```
+CREATE SCHEMA IF NOT EXISTS rails;
+CREATE SCHEMA IF NOT EXISTS vault;
+CREATE SCHEMA IF NOT EXISTS registry;
+```
+
+- Create extensions :
+
+```
+CREATE EXTENSION IF NOT EXISTS "hstore" WITH SCHEMA "rails";
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA "rails";
+CREATE EXTENSION IF NOT EXISTS "citext" WITH SCHEMA "registry";
+```
+
+- Change owner for schemas and etc inside the dump fiel to proper user.
+In my case that's `postgres`, and by default , Postgres in mounted disk mode sets that to `hashicorp` . 
+E.g. replacement : 
+
+```
+"OWNER TO hashicorp" --> "OWNER TO postgres"
+```
+Because we have some parts with SQL code like this : 
+
+```SQL
+ALTER TABLE vault.vault_kv_store OWNER TO postgres;
+```
+
+- Import the resulting file into newly created Postgres 9.6 instance ( *9.6.18 to be specific*  )
+
+- Install TFE in external services mode, used the new Postgres DB , host , name and password, but **THE VERY SAME ENC PASSWORD**
+
+- ..Well... it works. 
+
+E.g. we did TFE mounted disk mode with Postgrs 9.5.22 to TFE in External Services mode with Postgres 9.6.18
+
