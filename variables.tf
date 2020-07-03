@@ -3,7 +3,7 @@ variable "site_domain" {
 }
 
 variable "site_record" {
-  default = "ptfe-pm-1"
+  default = "ptfe-pm-migrate"
 }
 
 variable "region" {

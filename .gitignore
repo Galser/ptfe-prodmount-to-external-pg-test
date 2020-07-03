@@ -2,4 +2,5 @@
 terraform.tfstate
 terraform.tfstate*
 site_ssl_private_key.pem
+site_ssl_cert_bundle.pem
 .DS_Store

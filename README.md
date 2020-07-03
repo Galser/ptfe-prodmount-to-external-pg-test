@@ -4,8 +4,6 @@ Repository to test  ticket 29768 , ptfe migrate from mounted disk with PG 9.5.19
 
 # TODO
 
- - [ ] Import/clone old `ptfe-prodmount` repo
- - [ ] Deploy
  - [ ] Make backup from internal PostGres
  - [ ] Flush eveything on instance
  - [ ] Create new RDS PGSQL with version 9.6
@@ -13,4 +11,7 @@ Repository to test  ticket 29768 , ptfe migrate from mounted disk with PG 9.5.19
  - [ ] Test TFE
 
 
-
+# DONE
+- [x] Import/clone old `ptfe-prodmount` repo
+- [x] Deploy
+ 
