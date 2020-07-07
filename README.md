@@ -1,7 +1,9 @@
 # ptfe-prodmount-to-external-pg-test
 Repository to test  ticket 29768 , ptfe migrate from mounted disk with PG 9.5.19 to an external services with PG 9.6.
 
-Notes are here [notes.md]
+This is heavily based on repo : https://github.com/Galser/ptfe-prodmount-vc-cloud 
+
+No detailed instruction in the top-level readme as they had been moved to [ notes here](notes.md)
 
 
 # TODO
